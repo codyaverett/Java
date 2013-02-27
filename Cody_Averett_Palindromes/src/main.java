@@ -28,14 +28,16 @@ public class main
 			System.out.printf("Enter a positive 5 digit number for the Palindrome test \n");
 			userNumber = input.nextInt(); //gets number from the user
 			
-			if ( isPalindrome(userNumber) && isNumCorrectFormat(userNumber) ) //if number is a palindrome do this
+			if ( isNumCorrectFormat(userNumber) && isPalindrome(userNumber) ) //if number is a palindrome do this
 			{
 				System.out.printf("User number %d is a palindrome \n", userNumber); 
 				done = true; //user entered a correct number, nothing else to see here, move along		
 			} else {
-				System.out.printf("Sorry, %d is not a palindrome \n", userNumber);
+				System.out.printf("Sorry, %d is not a palindrome. Try Again. \n", userNumber);
 			}
 		}
+		
+		System.out.printf("END OF PROGRAM");
 		
 	}
 	
@@ -47,14 +49,17 @@ public class main
 	 */
 	private static boolean isNumCorrectFormat(int userNumber) 
 	{
-		int numLength = String.valueOf(userNumber).trim().length(); //cast to a string and get the length
+		//int numLength = String.valueOf(userNumber).length(); //cast to a string and get the length
+		int numLength = (int)(Math.log10(userNumber)+1); //use logs to get integer length
 		
-		if (numLength < 5 || numLength > 5) //logic
-			return false;
-		else { 
+		//System.out.printf("numLength is %d \n",numLength);  //for debugging purposes
+		
+		if (numLength < 5 || numLength > 5){ //logic, if it not formatted correctly do this
 			System.out.printf("The number you entered is not correctly formatted \n" +
-							  "Must have 5 digits exactly \n");
-			return true;
+					  "Must have 5 digits exactly \n");
+			return false;
+		} else { 			
+			return true; //returns true if number is formatted correctly
 		}
 	}
 
